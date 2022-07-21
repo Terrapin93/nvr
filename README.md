@@ -17,6 +17,6 @@ sudo ./python3.10 nvr.py
 <ul>
 <li>Albert Cicero (<a href="https://github.com/systemzerosys0">systemzerosys0</a>)
 <li>David Irish (<a href="https://github.com/Terrapin93">Terrapin93</a>)
-<li>Logan Anthony
+<li>Logan Anthony (<a href="https://github.com/loganocean">loganocean</a>)
 <li>Garin Pappas
 </ul>
