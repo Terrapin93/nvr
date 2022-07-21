@@ -13,7 +13,7 @@ YouTube presentation: (link to come)
 # Linux command line launch:
 sudo ./python3.10 nvr.py
 
-# Contributors:
+# Team:
 <ul>
 <li>Albert Cicero (<a href="https://github.com/systemzerosys0">systemzerosys0</a>)
 <li>David Irish (<a href="https://github.com/Terrapin93">Terrapin93</a>)
