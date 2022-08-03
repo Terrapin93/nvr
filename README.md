@@ -3,6 +3,8 @@ YouTube presentation: <a href="https://www.youtube.com/watch?v=Xr-IluMhAW8">http
 # nvr - the E-Z recon tool
 **nvr** is an easy-to-use, GUI-based network reconnaissance tool built in Python 3.10 that simplifies some of the most common nmap scans one might want to conduct on their network. By simply entering in your IP address or subnet and selecting the appropriate options for the type of scan you want to conduct, the user can retrieve valuable information about the scanned hosts, including open ports, service types and more.
 
+8/3/22: Option for normal output added to the nvr interface.
+
 # Pre-requisites:
 <ul>
 <li>Python 3.10

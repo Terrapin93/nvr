@@ -57,12 +57,14 @@ IP_input_area.grid(row=2, sticky="w", padx=10, pady=10)
 
 def clear_fields():
     IP_input_area.delete(0, END)
+    filename_input_area.delete(0, END)
     var_ping.set(0)
     var_tcp.set(0)
     var_udp.set(0)
     var_os.set(0)
     var_sversion.set(0)
-    var_verb.set(0) 
+    var_verb.set(0)
+    var_out.set(0) 
 # Function to clear input fields.
 
 clear_fields_button = tk.Button(topleft_frame, text = "Clear IP and Options", fg="#702963", bg="#CBC3E3", width = 20, command = clear_fields)
@@ -82,8 +84,10 @@ topright_frame.rowconfigure(4, weight=1)
 topright_frame.rowconfigure(5, weight=1)
 topright_frame.rowconfigure(6, weight=1)
 topright_frame.rowconfigure(7, weight=1)
-topright_frame.rowconfigure(8, weight=1) # Let's do this button
-# topright_frame.rowconfigure(9, weight=1) # Vuln scan button; item for later versions
+topright_frame.rowconfigure(8, weight=1)
+topright_frame.rowconfigure(9, weight=1)
+topright_frame.rowconfigure(10, weight=1) # Let's do this button
+# topright_frame.rowconfigure(XX, weight=1) # Vuln scan button; item for later versions
 # Top-right frame rows.
 
 Label(topright_frame, text="Scan options:", 
@@ -96,6 +100,7 @@ var_udp = IntVar()
 var_os = IntVar()
 var_sversion = IntVar()
 var_verb = IntVar()
+var_out = IntVar()
 # Checkbox variables. Might get rid of these later.
 
 Button1_ping = Checkbutton(topright_frame, text="Ping ", 
@@ -152,12 +157,28 @@ Button6_v = Checkbutton(topright_frame, text="Verbosity ",
                 width = 20,
                 anchor="w")
 
+Button7_v = Checkbutton(topright_frame, text="Output File", 
+                variable=var_out, 
+                font="bold", fg="#702963", bg="#CBC3E3", 
+                onvalue=1, 
+                offvalue=0,
+                height = 1,
+                width = 20,
+                anchor="w")
+
 Button1_ping.grid(row=1, sticky='w')
 Button2_tcp.grid(row=2, sticky='w')
 Button3_udp.grid(row=3, sticky='w')
 Button4_os.grid(row=4, sticky='w')
 Button5_sv.grid(row=5, sticky='w')
 Button6_v.grid(row=6, sticky='w')
+Button7_v.grid(row=7, sticky='w')
+
+filename_input = tk.Label(topright_frame, text = "If output, enter filename:", 
+    font="bold", fg="white", bg="#702963")
+filename_input.grid(row=8, sticky="w", padx=10, pady=10) 
+filename_input_area = tk.Entry(topright_frame, width = 30, fg="#702963", bg="#CBC3E3")
+filename_input_area.grid(row=9, sticky="w", padx=10, pady=10)
 
 def flagMatcher():
     ping = var_ping.get()
@@ -166,8 +187,9 @@ def flagMatcher():
     os = var_os.get()
     sversion = var_sversion.get()
     verb = var_verb.get()
-    flagArray = [ping, tcp, udp, os, sversion, verb]
-    argsArray = ["-sn", "-sT", "-sU", "-A", "-sV", "-v"] 
+    out = var_out.get()
+    flagArray = [ping, tcp, udp, os, sversion, verb, out]
+    argsArray = ["-sn", "-sT", "-sU", "-A", "-sV", "-v", "-oN"] 
     commandArray = ["sudo", "nmap", "--unique"]
     for i in range(0,len(flagArray)):
         # iterates through the numbers 0-length of flagArray
@@ -184,6 +206,10 @@ def flagMatcher():
     
 def nmap_scan():
     commandArray = flagMatcher()
+    if filename_input_area.get() != "":
+        commandArray.append(filename_input_area.get())
+    else:
+        commandArray = commandArray
     commandArray.append(IP_input_area.get())
     response = subprocess.check_output(commandArray)
     return response 
@@ -245,12 +271,12 @@ clear_button_label.grid(row=4, column=1, columnspan=2, padx=10, pady=10, sticky=
 # Clear button
 
 submit_button = tk.Button(topright_frame, text = "Let's Do This!", fg="white", bg="#770737", width = 20, command = terminalOutput)
-submit_button.grid(row=8, sticky="w", padx=5, pady=10) 
+submit_button.grid(row=10, sticky="w", padx=5, pady=10) 
 # button to conduct nmap scan
 
 # hold below for future vuln scan inclusion:
 # submit_button = tk.Button(topright_frame, text = "Second, vuln scan results", fg="white", bg="#770737", width = 20, command = openVulnScanWindow)
-# submit_button.grid(row=9, sticky="w", padx=5, pady=0) 
+# submit_button.grid(row=XX, sticky="w", padx=5, pady=0) 
 # button to open new window with vuln scan results
 
 exit_button=tk.Button(main_window, text = "Exit nvr", fg="white", bg="#770737", command = main_window.destroy)
