@@ -48,7 +48,7 @@ eye_label.grid(row=0, sticky="", pady=15)
 # Top Left frames with eye, instructions and entry fields.
 #Additionally, topleft frame with rows and the eye icon.
 
-IP_input = tk.Label(topleft_frame, text = "IP or Subnet (format: '192.168.56.101' or '192.168.56.1/24')", 
+IP_input = tk.Label(topleft_frame, text = "IP or Subnet (format: '192.168.56.101' or '192.168.56.0/24')", 
     font="bold", fg="white", bg="#702963")
 IP_input.grid(row=1, sticky="w", padx=10, pady=10) 
 IP_input_area = tk.Entry(topleft_frame, width = 30, fg="#702963", bg="#CBC3E3")
